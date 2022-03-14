@@ -19,7 +19,7 @@ module.exports = {
 			.setRequired(true)),
 	async execute(interaction) {
 		if(interaction.channel.id != '952404393699991562') {
-			await interaction.replay({ content: '해당 명령어를 사용할 수 없는 채널입니다.', ephemeral: true });
+			await interaction.reply({ content: '해당 명령어를 사용할 수 없는 채널입니다.', ephemeral: true });
 		} else {
 			const target = interaction.options.getUser('대상')
 			const punish = interaction.options.getString('처벌');
