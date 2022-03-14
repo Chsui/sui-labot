@@ -18,21 +18,25 @@ module.exports = {
 			.setDescription('제재 사유를 입력해 주세요.')
 			.setRequired(true)),
 	async execute(interaction) {
-		const target = interaction.options.getUser('대상')
-		const punish = interaction.options.getString('처벌');
-		const reason = interaction.options.getString('사유');
-		const warningEmbed = new MessageEmbed()
-			.setAuthor({ name: `${target.tag}`, iconURL: `${target.avatarURL()}` })
-			.setColor('#FF6C6C')
-			.setTitle('제재 처리')
-			.setDescription('규칙 위반으로 제재 처리 되었습니다.')
-			.addFields(
-				{ name: '제재 대상', value: Formatters.userMention(`${target.id}`)+'('+`${target.tag}`+')', inline: true },
-				{ name: '적용 처벌', value: punish, inline: true },
-				{ name: '제재 사유', value: reason+'\n\n`       이의 제기는 주인장에게 DM을 통해 문의 바랍니다.       `'},
-			)
-			.setTimestamp()
-		await interaction.reply({ content: '완료 되었습니다', ephemeral: true });
-		await interaction.channel.send({ content: Formatters.userMention(`${target.id}`), embeds: [warningEmbed] });
+		if(interaction.channel.id != '952404393699991562') {
+			await interaction.replay({ content: '해당 명령어를 사용할 수 없는 채널입니다.', ephemeral: true });
+		} else {
+			const target = interaction.options.getUser('대상')
+			const punish = interaction.options.getString('처벌');
+			const reason = interaction.options.getString('사유');
+			const warningEmbed = new MessageEmbed()
+				.setAuthor({ name: `${target.tag}`, iconURL: `${target.avatarURL()}` })
+				.setColor('#FF6C6C')
+				.setTitle('제재 처리')
+				.setDescription('규칙 위반으로 제재 처리 되었습니다.')
+				.addFields(
+					{ name: '제재 대상', value: Formatters.userMention(`${target.id}`)+'('+`${target.tag}`+')', inline: true },
+					{ name: '적용 처벌', value: punish, inline: true },
+					{ name: '제재 사유', value: reason+'\n\n`       이의 제기는 주인장에게 DM을 통해 문의 바랍니다.       `'},
+				)
+				.setTimestamp()
+			await interaction.reply({ content: '완료 되었습니다', ephemeral: true });
+			await interaction.channel.send({ content: Formatters.userMention(`${target.id}`), embeds: [warningEmbed] });
+		}
 	},
 };
