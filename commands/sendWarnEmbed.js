@@ -25,7 +25,7 @@ module.exports = {
 			const punish = interaction.options.getString('처벌');
 			const reason = interaction.options.getString('사유');
 			const warningEmbed = new MessageEmbed()
-				.setAuthor({ name: `${target.tag}`, iconURL: `${target.avatarURL()}` })
+				.setAuthor({ name: `${target.tag}`, iconURL: `${target.displayAvatarURL()}` })
 				.setColor('#FF6C6C')
 				.setTitle('제재 처리')
 				.setDescription('규칙 위반으로 제재 처리 되었습니다.')
